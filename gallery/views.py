@@ -24,3 +24,12 @@ def get_category(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html', {"message": message, 'locations': locations})
 
+
+    
+def location(request, location_id):
+    locations = Location.objects.all()
+    images = Image.objects.filter(location_id=location_id)
+    location = Location.objects.get(id=location_id)
+    title = location
+    return render(request, 'location.html', {'images': images, 'locations': locations, 'title': title})
+
