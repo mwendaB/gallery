@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns=[
-    url('',views.index,name='galleryHome'),
+    url('',views.index,name='index'),
     url('search/',views.get_category,name='category'),
     url('location/<str:search_location>/',views.get_location,name='location'),
 ]
