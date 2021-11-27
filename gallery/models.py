@@ -56,3 +56,17 @@ class Image(models.Model):
     def search_image(cls, search_term):
         gallery = cls.objects.filter(descripton__icontains=search_term)
         return gallery
+    
+    @classmethod
+    def update_image(cls, id ,image, description , name,category,location):
+        cls.objects.filter(id = id).update(image=image,description=description,name=name,category=category,location=location)
+        
+    @classmethod
+    def get_image_by_id(cls,id):
+        image =cls.objects.filter(id= id).first()
+        return image
+
+    @classmethod
+    def filter_by_location(cls,search_location):
+        location = cls.objects.filter(location__name=search_location).all()
+        return location
