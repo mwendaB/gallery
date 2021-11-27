@@ -1,6 +1,8 @@
 from django.db import models
 import datetime as dt
 
+# Create your models here.
+
 class Location(models.Model):
     name = models.CharField(max_length=30)
 
@@ -13,10 +15,11 @@ class Location(models.Model):
     def delete_location(self):
         self.delete()
 
-# Create your models here.
+
 class Image(models.Model):
-    image = models.ImageField(upload_to = 'images/', null = True)
-    location = models.ForeignKey(Location, null=True)
+    image = models.ImageField(upload_to = 'photos/', null = True)
     name = models.CharField(max_length=30)
-    time = models.DateTimeField(auto_now_add=True, null=True)
     descripton = models.TextField()
+    location_taken = models.ForeignKey(Location, null=True)
+    category = models.ManyToManyField(tags)
+    time_uloaded = models.DateTimeField(auto_now_add=True, null=True)
