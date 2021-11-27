@@ -14,3 +14,5 @@ class LocationTestCase(TestCase):
      def test_location_str(self):
         location = Location.objects.get(name="Test Location")
         self.assertEqual(str(location), "Test Location")
+
+class CategoryTestCase(TestCase):
