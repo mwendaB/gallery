@@ -15,7 +15,7 @@ class Location(models.Model):
     def delete_location(self):
         self.delete()
 
-class tags(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=30)
 
     def __str__(self):
@@ -36,5 +36,23 @@ class Image(models.Model):
     name = models.CharField(max_length=30)
     descripton = models.TextField()
     location_taken = models.ForeignKey(Location, null=True)
-    category = models.ManyToManyField(tags)
+    category = models.ManyToManyField(Category)
     time_uloaded = models.DateTimeField(auto_now_add=True, null=True)
+    
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
+
+    def update_image(self,name,description, location, category):
+        self.name = name
+        self.descripton = description
+        self.location = location
+        self.category = category
+        self.save()
+
+    @classmethod
+    def search_image(cls, search_term):
+        gallery = cls.objects.filter(descripton__icontains=search_term)
+        return gallery
