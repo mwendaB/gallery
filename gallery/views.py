@@ -1,10 +1,5 @@
 from django.http  import HttpResponse
+from .models import Image, Category, Location
 
 # Create your views here.
-def welcome(request):
-    return HttpResponse('Welcome to the Gallery')
-from django.http  import HttpResponse
-
-# Create your views here.
-def welcome(request):
-    return HttpResponse('Welcome to the gallery')
+def

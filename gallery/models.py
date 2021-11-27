@@ -35,7 +35,7 @@ class Image(models.Model):
     image = models.ImageField(upload_to = 'photos/', null = True)
     name = models.CharField(max_length=30)
     descripton = models.TextField()
-    location_taken = models.ForeignKey(Location, null=True)
+    location_taken = models.ForeignKey("Location", on_delete= models.CASCADE , null=True)
     category = models.ManyToManyField(Category)
     time_uloaded = models.DateTimeField(auto_now_add=True, null=True)
     
