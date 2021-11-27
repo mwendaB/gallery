@@ -15,7 +15,8 @@ class Location(models.Model):
     def delete_location(self):
         self.delete()
 
-
+class tags(models.Model):
+    
 class Image(models.Model):
     image = models.ImageField(upload_to = 'photos/', null = True)
     name = models.CharField(max_length=30)
