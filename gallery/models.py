@@ -26,6 +26,11 @@ class tags(models.Model):
 
     def delete_category(self):
         self.delete()
+
+         
+    def update_category(cls, id, name):
+        cls.objects.filter(id=id).update(name=name)
+        
 class Image(models.Model):
     image = models.ImageField(upload_to = 'photos/', null = True)
     name = models.CharField(max_length=30)
