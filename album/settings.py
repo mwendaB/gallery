@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'gallery',
         'USER': 'moringaschool',
-    'PASSWORD':'mwendaB',
+        'PASSWORD':'mwendaB',
     }
 }
 

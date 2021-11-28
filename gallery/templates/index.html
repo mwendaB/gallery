@@ -1,6 +1,5 @@
-{% base.html%}
+{%extends 'base.html'%}
 {% block content %}
-{{ block.super}}
 <div class="welcome">
     <div class="holder">
         <h2 id="category">Compel the audience. Capture the moment. Light with purpose</h2>
@@ -21,11 +20,7 @@
             <img src="{{photo.image.url}}" alt=" " class="card-img photo" height="200">
             <small id="photoDesc">{{photo.name}}</small>
         </div>
-        <!-- <div class="col-md-4">
-            <div class="card" style="width: 18rem"; data-toggle="modal" data-target="#{{photo.id}}">
-                <img src="{{photo.image.url}}" alt="{{photo.name}}" class="card-img copy">
-            </div>
-        </div> -->
+        </div> 
         <div class="modal fade" id="{{photo.id}}" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-md" role="document">

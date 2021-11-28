@@ -2,7 +2,7 @@
 {% load static%}
 {% block content %}
 {{ block.super}}
-<div class="welcom">
+<div class="container-fluid">
     <div class="holde">
         <h2>Found {{ images|length }} of searched category {{message}}</h2>
         <form role="form" class="pt-3" action="/search">
@@ -24,11 +24,6 @@
             <img src="{{photo.image.url}}" alt=" " class="card-img photo" height="200">
             <small id="photoDesc">{{photo.name}}</small>
         </div>
-        <!-- <div class="col-md-4">
-            <div class="card" style="width: 18rem"; data-toggle="modal" data-target="#{{photo.id}}">
-                <img src="{{photo.image.url}}" alt="{{photo.name}}" class="card-img copy">
-            </div>
-        </div> -->
         <div class="modal fade" id="{{photo.id}}" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-md" role="document">
