@@ -1,15 +1,17 @@
 {%extends 'base.html'%}
+{% load static %}
 {% block content %}
-<div class="welcome">
+
+<link href="https://fonts.googleapis.com/css?family=Charmonman|Dancing+Script|Kodchasan|Spirax|Abril+Fatface" rel="stylesheet">
+<div class="container-fluid">
     <div class="holder">
-        <h2 id="category">Compel the audience. Capture the moment. Light with purpose</h2>
+        <h2 id="category">Your online album</h2>
         <form role="form" class="pt-3" action="/search">
             <div class="form-group">
                 <input type="text" class="form-control mt-5 " placeholder="&#xF002; Search image in category"
                     style="font-family:Arial, FontAwesome" name="category">
             </div>
         </form>
-        <!-- <a href="#gallery" class="btn btn-warning explore">EXPLORE GALLERY</a> -->
     </div>
 </div>
 <div class="container mt-5">
