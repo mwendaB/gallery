@@ -9,7 +9,6 @@ def index(request):
     
     return render(request,'index.html',{'images': images, 'locations': locations})
 
-
 def get_category(request):
     if 'Category' in request.GET and request.GET["category"]:
         search_category = request.GET.get("category").lower()
