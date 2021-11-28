@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 urlpatterns=[
     url('',views.index,name='index'),
     url('search/',views.get_category,name='category'),
-       url(r'^location/',views.location,name ='location'),
+    url(r'^location/',views.location,name ='location'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
