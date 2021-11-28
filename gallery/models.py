@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
@@ -41,11 +42,11 @@ class Category(models.Model):
         cls.objects.filter(id=id).update(name=name)
         
 class Image(models.Model):
-    image = models.ImageField(upload_to = 'images/', null = True)
+    image = CloudinaryField('image', null=True)
     name = models.CharField(max_length=30)
-    descripton = models.TextField()
+    descripton = models.TextField(max_length=60)
     location_taken = models.ForeignKey("Location", on_delete= models.CASCADE , null=True)
-    category = models.ManyToManyField(Category)
+    category = models.ForeignKey('Category',on_delete=models.CASCADE,null=True)
     time_uloaded = models.DateTimeField(auto_now_add=True, null=True)
     
     def save_image(self):
