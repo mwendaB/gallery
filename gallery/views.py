@@ -10,9 +10,9 @@ def index(request):
     return render(request,'index.html',{'images': images, 'locations': locations})
 
 def get_category(request):
-    if 'Category' in request.GET and request.GET["category"]:
+    if 'category' in request.GET and request.GET["category"]:
         search_category = request.GET.get("category").lower()
-        searched_category = Image.filter_by_category(search_category)
+        searched_category = Image.search_by_category(search_category)
         message = f"{search_category}"
         locations = Location.objects.all()
 

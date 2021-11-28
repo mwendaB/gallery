@@ -2,4 +2,50 @@
 {% load static %}
 {% block content %}
 
-
+<div class="container">
+        <h3>Locations</h3>
+        {% for loc in location %}
+        <div class="row">
+            <button id ="button" class = "btn btn-warning">{{ loc.loc }}</button>
+        </div>
+        {% endfor %}
+</div>
+<div class="container-fluid mt-5">
+    <div class="row p-4">
+        {% for photo in images%}
+        <div class = "col-md-4" data-toggle ="modal" data-target="#showPictureModal{{photo.id}}">
+            <img src="{{photo.image.url}}" alt="" class="img-responsive">
+        </div>
+        <!-- Modal -->
+<div class="modal fade" id="showPictureModal{{photo.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalPictureTitle">{{photo.name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img src="{{photo.image.url}}" class = "img-responsive"alt="{{photo.name}}">
+          <p class="text-centre">About:{{photo.description}}</p><hr>
+          <div class="row">
+            <div class="col-md-4">
+                <p>Category:{{photo.category}}</p>
+            </div>
+            <div class="col-md-4">
+                <p>Location:{{photo.location}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <p>Image link</p>
+            <input class="form-control" type="text" value="{{photo.image.url}}" id="{{photo.id}}.url">
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+    </div>
+</div>
+{% endblock %}
