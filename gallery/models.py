@@ -44,7 +44,7 @@ class Category(models.Model):
 class Image(models.Model):
     image = CloudinaryField('image', null=True)
     name = models.CharField(max_length=30)
-    descripton = models.TextField(max_length=60)
+    descripton = models.TextField(max_length=200)
     location_taken = models.ForeignKey("Location", on_delete= models.CASCADE , null=True)
     category = models.ForeignKey('Category',on_delete=models.CASCADE,null=True)
     time_uloaded = models.DateTimeField(auto_now_add=True, null=True)

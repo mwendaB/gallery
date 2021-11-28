@@ -28,25 +28,38 @@
                 <div class="modal-dialog modal-dialog-centered modal-md" role="document">
                     <div class="modal-content modalcard">
                         <div class="modal-header">
-                            <h6 class="modal-title" id="imageheader">{{photo.name}}  | {{photo.location}}</h6>
+                            <h6 class="modal-title" id="imageheader">{{photo.name}}  | {{photo.location_taken}}</h6>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <img src="{{photo.image.url}}" alt="{{photo.name}}" class="img-fluid">
-                            <p class="text-center mt-1">{{photo.description}}</p>
+                            <p class="text-center mt-1">{{photo.descripton}}</p>
                             
                         </div>
                         <div class="modal-footer">
                             <input class="form-control" type="text" value="{{photo.image.url}}" id="{{photo.id}}.url">
-                            <button class="btn btn-outline-success btn-sm" onclick="copypath('{{photo.id}}.url')">Copy</button>
+                            <button class="btn btn-outline-success btn-sm" value="" onclick="copylink(this.value)">Copy</button>
                             <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+<script>
+function copylink(value) {
+    console.log('hi yellow')
+    function handler(event){
+        event.clipboardData.setData('text/plain', value);
+        event.preventDefault();
+        document.removeEventListener('copy', handler, true);
+    }
+    document.addEventListener('copy', handler, true);
+    document.execCommand('copy');
+}
+</script>
+
         {%endfor%}
     </div>
 </div>
