@@ -1,59 +1,32 @@
 <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Charmonman|Kodchasan|Dancing+Script|Spirax" rel="stylesheet">
 
-<nav class="navbar " style="background-color:#13e4af;">
+<nav class="navbar navbar-light navbar-expand-lg sticky-top bg-light">
     <div class="container-fluid">
-      <div class="navbar-header">
-        <a style="font-family: 'Kodchasan', sans-serif;"class="navbar-brand" id="victor" href="{% url 'homePage' %}">The Image Gallery
-           </a>
-      </div>
-
-      <!--Dropdown for filtering by location or category-->
-
-      <ul class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                 data-toggle="dropdown" aria-haspopup="true"
-                 style="font-family: 'Kodchasan', sans-serif;"aria-expanded="false">
-                FILTER BY CATEGORY
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% for tag in tags %}
-                <a class="dropdown-item" style="font-family: 'Kodchasan', sans-serif;" href="/?tags={{tag.id}}">{{tag.name}}</a>
-                <div class="dropdown-divider"></div>
-                {% endfor %}
-              </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/#category">CATEGORY</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  LOCATION
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  {% for location in locations %}
+                  <a class="dropdown-item" href="/location/{{location.name}}">{{location.name}}</a>
+                  {% endfor %}
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">ABOUT</a>
+              </li>
             </ul>
-
-            <ul class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#"
-                 id="navbarDropdown" role="button" data-toggle="dropdown"
-                 style="font-family: 'Kodchasan', sans-serif;" aria-haspopup="true" aria-expanded="false">
-               FILTER BY LOCATION
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% for location in locations %}
-                <a class="dropdown-item" style="font-family: 'Kodchasan', sans-serif;" href="/?location={{location.id}}">{{location.name}}</a>
-                <div class="dropdown-divider"></div>
-                {% endfor %}
-              </div>
-            </ul>
-
-
-      <!--end of dropdown for filtering by location or category-->
-
-      <!-- Adding a search form  -->
-      <div class="col-sm-4 col-md-4 navbar-right">
-
-        <form class="navbar-form" role="search" action="{% url 'search_image' %}">
-
-          <div class="input-group">
-            <input type="text" style="font-family: 'Kodchasan', sans-serif; " name="image">
-            <div class="input-group-btn">
-              <button class="btn btn-info" >Submit</button>
-            </div>
           </div>
-
-        </form>
-      </div>
-      <!-- search form end -->
     </div>
-  </nav>
+</nav>

@@ -1,5 +1,5 @@
 from django.db import models
-import datetime as dt
+
 
 # Create your models here.
 
@@ -12,8 +12,17 @@ class Location(models.Model):
     def delete_location(self):
         self.delete()
     
+       
+    def update_location(cls, id, name):
+        cls.objects.filter(id=id).update(name=name)
+    
     def __str__(self):
         return self.name
+    
+    @classmethod
+    def all_locations(cls):
+        locations = Location.objects.all()
+        return locations
 
 class Category(models.Model):
     name = models.CharField(max_length=30)

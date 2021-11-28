@@ -1,95 +1,64 @@
-
-  
-{%extends 'base.html'%}
+{%extends 'all-gallery/base.html'%}
+{% load static%}
 {% block content %}
-<div class="container">
-
-  <div class="row">
-    {% if pictures%}
-      <h2 style="font-family: 'Kodchasan', sans-serif;color:white;"> Here are images of your search term: {{message}}</h2>
-    {% else %}
-      <h2 style="font-family: 'Kodchasan', sans-serif;color:white;"> It appears that there are 0 images for your search term {{message}}, please try again. </h2>
-    {% endif %}
-
-  </div>
-
-  <div class="row">
-
-
-
-  {% if pictures %}
-<div class="container">
-
-<div class="card-columns">
-
-    {% for image in pictures %}
-  <div class="card border-secondary">
-   <img src="{{image.image.url}}"
-           data-target="#imageModal{{image.id}}" data-toggle="modal"
-           alt="" class="img-fluid" id="eachimage" size="100px200">
-  </div>
-     {% endfor %}
-</div>
-</div>
-
-  {% endif %}
-  </div>
-</div>
-
-
-
-<!--modal-->
-    {% for image in pictures %}
-      <div class="modal fade" id="imageModal{{image.id}}" tabindex="-1"
-           role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <img src="{{image.image.url}}"
-                   data-toggle="modal" alt="" style="height:600px;width:500px;">
-              <div class="modal-header">
-              <h4 id="modal-text text-center">{{image.name}}</h4>
-                  <h4 style="font-family: 'Kodchasan', sans-serif;color:blue;" id="modal-text ">{{image.location}}</h4>
-                  {% for tag in image.tags.all %}
-
-                <button class="btn btn-lg btn-success"
-                        style="font-family: 'Kodchasan', sans-serif;color:white;"> #{{ tag.name }}</button>
-
-                 {% endfor %}
+{{ block.super}}
+<div class="welcome">
+    <div class="hold">
+        <h2>Found {{ images|length }} of searched category {{message}}</h2>
+        <form role="form" class="pt-3" action="/search">
+            <div class="form-group">
+                <input type="text" class="form-control mt-5 " placeholder="&#xF002; Search image in category"
+                    style="font-family:Arial, FontAwesome" name="category">
             </div>
+        </form>
+    </div>
+</div>
+<div class="container mt-5">
 
-            <div class="modal-footer">
+    {% if images%}
 
-                <input class="form-control" type="text" value="https://gallerymelissa.herokuapp.com{{image.image.url}}">
-                <button  type="button" value="https://gallerymelissa.herokuapp.com{{image.image.url}}"  onclick="copyLink(this.value)" class="btn btn-outline-secondary my-2 my-sm-0 link-btn">Copy Photo Link</button>
-
-            </div>
-            <div class="modal-footer">
-
-              <h5 id=modal-text>{{image.description}}</h5>
-
-              <button type="button" class="btn btn-outline-secondary
-              my-2 my-sm-0" data-dismiss="modal">Close</button>
-
-            </div>
-          </div>
+    <div class="row gallery p-3" id="gallery">
+        {%for photo in images%}
+        <div class="col-sm-8 col-lg-3 mb-3 imgdisplay"  data-toggle="modal" data-target="#{{photo.id}}">
+            <img src="{{photo.image.url}}" alt=" " class="card-img photo" height="200">
+            <small id="photoDesc">{{photo.name}}</small>
         </div>
-      </div>
+        <div class="modal fade" id="{{photo.id}}" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content modalcard">
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="imageheader">{{photo.name}}  | {{photo.location}}</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="{{photo.image.url}}" alt="{{photo.name}}" class="img-fluid">
+                            <p class="text-center mt-1">{{photo.description}}</p>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <input class="form-control" type="text" value="{{photo.image.url}}" id="{{photo.id}}.url">
+                            <button class="btn btn-outline-success btn-sm" onclick="copypath('{{photo.id}}.url')">Copy</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-md-6 pt-4">
+            <h3>No images in this category yet, check for updates later.</h3>
+        </div>
+    </div>
+       
+        
+    
+    {% endif %}
+</div>
 
-<script>
-
-function copyLink(value) {
-    console.log('sdfgsdfg')
-    function handler(event){
-        event.clipboardData.setData('text/plain', value);
-        event.preventDefault();
-        document.removeEventListener('copy', handler, true);
-    }
-
-    document.addEventListener('copy', handler, true);
-    document.execCommand('copy');
-
-}
-</script>
-    {% endfor %}
-
-{% endblock %}
+{%endblock%}
