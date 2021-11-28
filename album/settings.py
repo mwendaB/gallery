@@ -36,7 +36,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'gallery',
-    'bootstrap4',
+    'bootstrap3',
     'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',

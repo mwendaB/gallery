@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-inverse">
     <a class="navbar-brand" href="/">The Gallery</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -26,13 +26,29 @@
             Location
           </a>
 
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <div class="dropdown" >
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+              <span class="caret">
             {% for location in locations %}
-            <a class="dropdown-item" href="/?location={{location.id}}">{{location.name}}</a>
+            <ul  class="dropdown-menu">
+              <li> <a href="/?location={{location.id}}">{{location.name}}</a> </li>
+            </ul>
+          </span>
+        </button>
             {%endfor%}
+         
+           
           </div>
+         
       </ul>
+     
     </div>
+    </div>
+    <div style="width: 30%;">
+      <form class="d-flex" style="float: right;" action="{{ images|length }}">
+        <input class="form-control me-2" type="search" placeholder="Search by category...." name="category" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit" style="float: right;">Search</button>
+      </form>
     </div>
   </nav>
 </body>

@@ -1,67 +1,97 @@
-{%extends base.html%}
-{% load static%}
-{% block content %}
-<div class="container-fluid">
-    <div class="holde">
-        <h2>Found {{ images|length }} of searched category {{message}}</h2>
-        <form role="form" class="pt-3" action="/search">
-            <div class="form-group">
-                <input type="text" class="form-control mt-5 " placeholder="&#xF002; Search image in category"
-                    style="font-family:Arial, FontAwesome" name="category">
+<div class="photo-gallery">
+    <div class="container-fluid">
+        <div class="px-lg-5">
+            <div class="row ">
+                <div class="col-lg-12 m-3">
+                    <h1 class="text-center headings" style="text-decoration: underline;">Location:
+                        <span class="text-capitalize">{{title }}</span>
+                    </h1>
+                </div>
             </div>
-        </form>
-       
-    </div>
-</div>
-<div class="container mt-5">
-
-    {% if images%}
-
-    <div class="row gallery p-3" id="gallery">
-        {%for photo in images%}
-        <div class="col-sm-8 col-lg-3 mb-3 imgdisplay"  data-toggle="modal" data-target="#{{photo.id}}">
-            <img src="{{photo.image.url}}" alt=" " class="card-img photo" height="200">
-            <small id="photoDesc">{{photo.name}}</small>
-        </div>
-        <div class="modal fade" id="{{photo.id}}" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-                    <div class="modal-content modalcard">
-                        <div class="modal-header">
-                            <h6 class="modal-title" id="imageheader">{{photo.name}}  | {{photo.location}}</h6>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{photo.image.url}}" alt="{{photo.name}}" class="img-fluid">
-                            <p class="text-center mt-1">{{photo.description}}</p>
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <input class="form-control" type="text" value="{{photo.image.url}}" id="{{photo.id}}.url">
-                            <button class="btn btn-outline-success btn-sm" onclick="copypath('{{photo.id}}.url')">Copy</button>
-                            <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
-                            </button>
+            <div class="row">
+                {% for photo in images %}
+                <!-- Gallery Photo item start -->
+                <div class="col-xl-3 col-lg-4 col-md-12 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="{{ photo.image.url }}" alt=""
+                            class="img-fluid card-img-top">
+                        <div class="p-4">
+                            <h5 class="headings text-center"> <a data-bs-toggle="modal"
+                                    data-bs-target="#modalDisplayImageDetails{{photo.id}}"
+                                    class="text-dark text-capitalize modal-click">
+                                    {{ photo.name }}
+                                </a></h5>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <small class="text-muted">
+                                        <span class="badge rounded-pill bg-info text-white text-capitalize">
+                                            {{photo.category }}
+                                        </span>
+                                    </small>
+                                </div>
+                                <div>
+                                    <small class="text-muted">
+                                        <span class="badge rounded-pill bg-dark text-white text-capitalize">
+                                            {{photo.location }}
+                                        </span>
+                                    </small>
+                                </div>
+                            </div>
+                            <div
+                                class="d-flex align-items-center justify-content-between rounded-pill bg-warning px-3 py-2 mt-4">
+                                <a data-bs-toggle="modal" data-bs-target="#modalDisplayImageDetails{{photo.id}}"
+                                    class="text-dark modal-click">
+                                    <p class="small mb-0">
+                                        View More
+                                        <i class="fa fa-arrow-right"></i>
+                                    </p>
+                                </a>
+                                <div class="badge badge-danger px-3 rounded-pill font-weight-normal text-dark">
+                                    {{photo.created_at|date}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {%endfor%}
-    </div>
-    {% else %}
-    <div class="row">
-        <div class="col-md-4">
-            <img src="{%static 'photos/found.jpeg'%}" alt="">
-        </div>
-        <div class="col-md-6 pt-4">
-            <h3>No images in this category yet, check for updates later.</h3>
-        </div>
-    </div>
-       
-        
-    
-    {% endif %}
-</div>
+                <!-- modal to display the image details -->
+                <div class="modal fade" id="modalDisplayImageDetails{{photo.id}}" tabindex="-1"
+                    aria-labelledby="modalDisplayImageDetailsLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalDisplayImageDetailsLabel">{{ photo.name}} <small
+                                        class="badge rounded-pill bg-warning text-dark">{{ photo.location}}</small></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="{{ photo.image.url }}" alt="" class="img-fluid">
+                                <div class="content m-3">
+                                    <h6 class="headings text-capitalize badge rounded-pill bg-warning text-dark">
+                                        <small>{{ photo.category }}</small>
+                                    </h6>
+                                    <h4 class="headings text-underline">Description</h4>
+                                    <p class="m-3 headings">
+                                        {{photo.description }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal end -->
+                <!-- End -->
+                {% empty %}
+                <!-- no photos -->
+                <div class="col-md-12 text-center  text-capitalize">
+                    <h1>
+                        <i class="fa fa-frown-o text-danger"></i>
+                        No photos found !!
+                    </h1>
+                </div>
+                {% endfor %}
 
-{%endblock%}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
