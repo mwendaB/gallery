@@ -6,11 +6,9 @@
 <div class="container-fluid mt-5">
 <div class="row p-4">
 {% for image in images%}
-<div class = "col-md-4" data-toggle ="modal" data-target="#showPictureModal{{photo.id}}">
+<div class = "col-md-4" data-toggle ="modal" data-target="#showPictureModal{{image.id}}">
   
    <img src="{{image.image.url}}" alt=" " class = "img-fluid photo" style="height: 100%; width: 100%; padding: 1%;">
-   
-
    </div>
 
 <!-- Modal -->
@@ -25,28 +23,24 @@
         </div>
         <div class="modal-body">
         <img src="{{image.image.url}}" class = "img-fluid"alt="{{photo.name}}" >
-        <p class="text-centre">About:{{image.description}}</p><hr>
+        <p class="text-centre">About:{{image.descripton}}</p><hr>
         <div class="row">
             <div class="col-md-4">
             <p>Category:{{image.category}}</p>
             </div>
             <div class="col-md-4">
-            <p>Location:{{image.location}}</p>
+            <p>Location:{{image.location_taken}}</p>
             </div>
         </div>
         </div>
         <div class="modal-footer">
-            
-            <input class="form-control"  type="text" value="{{image.image.url}}" >
-            <button class="btn btn-primary" id="copyLink" onclick="copylink(this.value)" >copy</button>
+            <input type="text" id="imagelink" value="{{image.image.url}}" class="btn btn-outline-primary form-control photoUrl" readonly>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
     </div>
 </div>
 
 </div>
-  
-  
    
 {% endfor %}
 </div>

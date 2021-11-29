@@ -16,7 +16,8 @@
         <div class = "col-md-4" data-toggle ="modal" data-target="#showPictureModal{{photo.id}}">
             <img src="{{photo.image.url}}" alt="" class="img-fluid" style="height: 100%; width: 100%; padding: 1%;">
         </div>
-        <!-- Modal -->
+        
+      <!-- Modal -->
 <div class="modal fade" id="showPictureModal{{photo.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -28,26 +29,25 @@
         </div>
         <div class="modal-body">
           <img src="{{photo.image.url}}" class = "img-fluid"alt="{{photo.name}}" >
-          <p class="text-centre">About:{{photo.description}}</p><hr>
+          <p class="text-centre">About:{{photo.descripton}}</p><hr>
           <div class="row">
             <div class="col-md-4">
                 <p>Category:{{photo.category}}</p>
             </div>
             <div class="col-md-4">
-                <p>Location:{{photo.location}}</p>
+                <p>Location:{{photo.location_taken}}</p>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-            
-            <input class="form-control"  type="text" value="{{photo.image.url}}" >
-            <button class="btn btn-primary" id="copypath" onclick="copypath(this.value)" >copy</button>
+            <input type="text" id="imagelink" value="{{photo.image.url}}" class="btn btn-outline-primary form-control photoUrl" readonly>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
 
   </div>
+
 
  
   {% endfor %}
