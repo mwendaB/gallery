@@ -51,3 +51,16 @@ def location_Europe(request):
     
     return render(request, 'location.html', {'images': images, })
 
+def location_Asia(request):
+    images = Image.filter_by_location("Asia")
+    print(images)
+    
+    return render(request, 'location.html', {'images': images, })
+
+def location_Austraria(request):
+    images = Image.filter_by_location("Austraria")
+    print(images)
+    
+    return render(request, 'location.html', {'images': images, })
+  
+
