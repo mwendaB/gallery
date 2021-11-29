@@ -75,10 +75,6 @@ class ImageTestClass(TestCase):
         self.mara.save_image()
         self.mara.update_image(self.mara.id, 'images/img.jpg')
         new_img = Image.objects.filter(image='media/images/img1.jpg')
-        self.name = name ()
-        self.descripton = description
-        self.location = location
-        self.category = category
         self.save()
         self.assertFalse(len(new_img) > 0)
 

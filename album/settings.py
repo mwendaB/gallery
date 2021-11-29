@@ -15,6 +15,7 @@ import os
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-99p_2rk=7$#^w935!-+w8ays_e3ce0fn2r4((4^hg67&brn(8#'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,16 +84,16 @@ WSGI_APPLICATION = 'album.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gal',
-        'USER': 'moringaschool',
-        'PASSWORD':'mwendaB',
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD':config('PASSWORD'),
     }
 }
 
 cloudinary.config( 
-  cloud_name = "dovhk8wwx", 
-  api_key = "453345884763267", 
-  api_secret = "NpcdwVqIB8NDYm_0dv0cG7--PbA" 
+    cloud_name =config('CLOUD_NAME'),
+    api_key=config('CLOUD_API_KEY'), 
+    api_secret=config('API_SECRET'),
 )
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
