@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+{% block content %}
+{{ block.super}}
+
+<h1>Hey you searched for {{search}}</h1>
+<div class="container-fluid mt-5">
+   <div class="row p-4">
+{% for picture in pictures%}
+<div class = "col-md-4" data-toggle ="modal" data-target="#showPictureModal{{photo.id}}">
+   <img src="{{picture.image.url}}" alt="" class="img-fluid">
+
+  <h1> {{ picture.name}} </h1>
+   {{picture.image.url}}
+</div>
+{% endfor %}
+
+
+
+{% endblock %}
+

@@ -51,7 +51,12 @@ class ImageTestClass(TestCase):
         self.category = Category(name='Wildlife')
         self.category.save_category()
 
-        self.mara= Image(id=1,name = 'Elephants', descripton ='Testing images class model',location_taken=self.location,category=self.category)
+        self.mara= Image(
+        id=1,
+        name = 'Elephants', 
+        descripton ='Testing images class model',
+        location_taken=self.location,
+        category=self.category)
 
     def test_instance(self):
         self.assertTrue(isinstance(self.mara,Image))
@@ -70,6 +75,11 @@ class ImageTestClass(TestCase):
         self.mara.save_image()
         self.mara.update_image(self.mara.id, 'images/img.jpg')
         new_img = Image.objects.filter(image='media/images/img1.jpg')
+        self.name = name ()
+        self.descripton = description
+        self.location = location
+        self.category = category
+        self.save()
         self.assertFalse(len(new_img) > 0)
 
     def test_get_image_by_id(self):

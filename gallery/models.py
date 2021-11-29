@@ -61,6 +61,9 @@ class Image(models.Model):
         self.location = location
         self.category = category
         self.save()
+    def __str__(self):
+        return self.name
+
 
     @classmethod
     def search_image(cls, search_term):
@@ -78,7 +81,7 @@ class Image(models.Model):
 
     @classmethod
     def filter_by_location(cls,search_location):
-        location = cls.objects.filter(location__name=search_location).all()
+        location = Image.objects.filter(location_taken__name__icontains=search_location)
         return location
     @classmethod
     def search_by_category(cls,search_term):

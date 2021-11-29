@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'album.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gallery',
+        'NAME': 'gal',
         'USER': 'moringaschool',
         'PASSWORD':'mwendaB',
     }
